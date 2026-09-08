@@ -1,0 +1,33 @@
+.ORG 8000H
+START:
+        MOV DPTR,#9000H
+        MOVX A,@DPTR
+        CJNE A,#41H,L5
+L5:
+        JC L1
+        CLR C
+        SUBB A,#37H
+        SJMP L2
+L1:
+        CLR C
+        SUBB A,#30H
+L2:
+        SWAP A
+        MOV R0,A
+        INC DPTR
+        MOVX A,@DPTR
+        CJNE A,#41H,L6
+L6:
+        JC L3
+        CLR C
+        SUBB A,#37H
+        SJMP L4
+L3:
+        CLR C
+        SUBB A,#30H
+L4:
+        ORL A,R0
+        INC DPTR
+        MOVX @DPTR,A
+END
+
